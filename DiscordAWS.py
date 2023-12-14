@@ -19,6 +19,8 @@ token = str(os.getenv('TOKEN'))
 async def on_ready(): #Triggers the following operation
     print("Logged in as a bot{0.user}".format(client))
     
+
+    #Prints EC2 Data
     print(ec2_metadata.region)
     print(ec2_metadata.instance_id)
     print({ec2_metadata.public_ipv4})
@@ -46,9 +48,10 @@ async def on_message(message):
             await message.channel.send(f'Bye Bye {username}!')
 
         elif user_message.lower() == "ec2 data":
-            await message.channel.send(f'Your instance data: {ec2_metadata.region}\nEC2 Instance ID: {ec2_metadata.instance_id}\nIP Address: {ec2_metadata.public_ipv4}')
+            await message.channel.send(f'Your Region: {ec2_metadata.region}\nEC2 Instance ID: {ec2_metadata.instance_id}\nIP Address: {ec2_metadata.public_ipv4}')
 
         else:
             await message.channel.send(f"Error, try again")
-            
+
+#Runs the code with the token key through AWS instance            
 client.run(token)
